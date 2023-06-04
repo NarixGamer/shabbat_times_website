@@ -2,10 +2,11 @@ new Vue({
   el: '#app',
   data: {
     city: null,
-    error: null,
     startDate: null,
-    endDate: null
-
+    endDate: null,
+    shabbatIn: null,
+    parasha: null,
+    havdala: null
   },
   mounted() {
     fetch('https://www.hebcal.com/shabbat?cfg=json&geonameid=2761369&M=on')
@@ -27,9 +28,20 @@ new Vue({
           month: '2-digit',
           year: 'numeric'
         });
+        let shabbatStart = data.items[0].date;
+        this.shabbatIn = new Date(shabbatStart).toLocaleTimeString('de-DE', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        this.parasha = data.items[0].memo;
+        let havdalaDate = data.items[0].date;
+        this.havdala = new Date(havdalaDate).toLocaleTimeString('de-DE', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
       })
       .catch(error => {
-        this.error = 'Fehler beim Abrufen der Daten: ' + error;
+        console.log('Fehler beim Abrufen der Daten: ' + error);
       });
   }
 });
