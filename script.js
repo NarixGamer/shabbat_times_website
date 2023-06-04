@@ -34,7 +34,7 @@ new Vue({
           minute: '2-digit'
         });
         this.parasha = data.items[0].memo;
-        let havdalaDate = data.items[0].date;
+        let havdalaDate = data.items[2].date;
         this.havdala = new Date(havdalaDate).toLocaleTimeString('de-DE', {
           hour: '2-digit',
           minute: '2-digit'
